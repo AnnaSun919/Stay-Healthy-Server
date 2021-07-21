@@ -6,8 +6,12 @@ const userSchema = new Schema({
     type: String,
     unique: String,
   },
-  password: String,
+  passwordHash: {
+    type: String,
+    required: true,
+  },
   description: { type: String, default: "NA" },
+  Img: String,
 });
 
 const User = model("User", userSchema);
