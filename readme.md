@@ -1,6 +1,4 @@
-**Be active , stay healthy**
-
-**Description**
+## Be active , stay healthy
 
 ## Description
 
@@ -67,7 +65,7 @@ activities.comment()
 
 ## Server
 
-## Models
+**Models**
 
 User Model
 
