@@ -7,12 +7,12 @@ const bcrypt = require("bcryptjs");
 const UserModel = require("../models/User.model");
 
 router.post("/signup", (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, image } = req.body;
   console.log(username, password);
 
-  if (!username || !password) {
+  if (!username || !password || !image) {
     res.status(500).json({
-      errorMessage: "Please enter username and password",
+      errorMessage: "Please enter all field",
     });
     return;
   }
@@ -35,7 +35,7 @@ router.post("/signup", (req, res) => {
   // creating a salt
   let salt = bcrypt.genSaltSync(10);
   let hash = bcrypt.hashSync(password, salt);
-  UserModel.create({ username: username, passwordHash: hash })
+  UserModel.create({ username: username, passwordHash: hash, image: image })
     .then((user) => {
       // ensuring that we don't share the hash as well with the user
       user.passwordHash = "***";

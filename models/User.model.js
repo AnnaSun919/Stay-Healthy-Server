@@ -11,7 +11,7 @@ const userSchema = new Schema({
     required: true,
   },
   description: { type: String, default: "NA" },
-  Img: String,
+  image: String,
 });
 
 const User = model("User", userSchema);
