@@ -10,6 +10,7 @@ const activitySchema = new Schema({
   time: String,
   description: String,
   creater: { type: Schema.Types.ObjectId, ref: "User" },
+  comment: { type: Schema.Types.ObjectId, ref: "Comment" },
   // creater: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 

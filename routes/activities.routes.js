@@ -49,11 +49,42 @@ router.get("/activities", (req, res) => {
     });
 });
 
+router.get("/activity/:id", (req, res) => {
+  console.log("hi/id");
+  id = req.params.id;
+  ActivityModel.findById(id)
+    .populate("creater")
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: "Something went wrong",
+        message: err,
+      });
+    });
+});
+
+router.delete("/activity/:id", (req, res) => {
+  console.log("delete");
+  ActivityModel.findByIdAndDelete(req.params.id)
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: "Something went wrong",
+        message: err,
+      });
+    });
+});
+
 router.get("/activity/:id/edit", (req, res) => {
   console.log("Hi");
   id = req.params.id;
 
   ActivityModel.findById(id)
+
     .then((response) => {
       res.status(200).json(response);
     })
@@ -67,10 +98,20 @@ router.get("/activity/:id/edit", (req, res) => {
 
 router.patch("/activity/:id/edit", (req, res) => {
   let id = req.params.id;
-  const { name, location, category } = req.body;
+  const { name, location, time, category, description, date } = req.body;
+
   ActivityModel.findByIdAndUpdate(
     id,
-    { $set: { name: name, location: location, category: category } },
+    {
+      $set: {
+        name: name,
+        location: location,
+        category: category,
+        time: time,
+        date: date,
+        description: description,
+      },
+    },
     { new: true }
   )
     .then((response) => {
