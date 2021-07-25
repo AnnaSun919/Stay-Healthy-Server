@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ActivityModel = require("../models/Activity.model");
+const isLoggedIn = require("./auth.routes.js");
 
 router.post("/activity/create", (req, res) => {
   const {
@@ -46,7 +47,6 @@ router.post("/activity/create", (req, res) => {
 });
 
 router.get("/activities", (req, res) => {
-  console.log("hi");
   ActivityModel.find()
     .then((activity) => {
       res.status(200).json(activity);
@@ -60,7 +60,6 @@ router.get("/activities", (req, res) => {
 });
 
 router.get("/activity/:id", (req, res) => {
-  console.log("hi/id");
   id = req.params.id;
   ActivityModel.findById(id)
     .populate("creater")
