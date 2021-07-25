@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const CommentModel = require("../models/Comment.model");
+const ActivityModel = require("../models/Activity.model");
 
 router.post("/comment/create", (req, res) => {
   const { comment, creater, activity } = req.body;
+  console.log(activity);
 
   if (!comment) {
     res.status(500).json({
@@ -18,6 +20,14 @@ router.post("/comment/create", (req, res) => {
     activity: activity,
   })
     .then((response) => {
+      console.log(response.activity);
+      return ActivityModel.findByIdAndUpdate(
+        response.activity,
+        { $push: { comments: response.activity } },
+        { new: true }
+      );
+    })
+    .then((response) => {
       res.status(200).json(response);
     })
     .catch((err) => {
@@ -30,8 +40,9 @@ router.post("/comment/create", (req, res) => {
 });
 
 router.get("/comments", (req, res) => {
-  console.log("hi");
+  console.log(`HIHI ${req.params}`);
   CommentModel.find()
+    .populate("creater")
     .then((response) => {
       res.status(200).json(response);
     })

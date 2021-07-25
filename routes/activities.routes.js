@@ -3,8 +3,17 @@ const router = express.Router();
 const ActivityModel = require("../models/Activity.model");
 
 router.post("/activity/create", (req, res) => {
-  const { time, date, name, image, description, location, category, creater } =
-    req.body;
+  const {
+    time,
+    date,
+    name,
+    image,
+    description,
+    location,
+    category,
+    creater,
+    comments,
+  } = req.body;
 
   if (!name || !date || !time || !description || !location) {
     res.status(500).json({
@@ -22,6 +31,7 @@ router.post("/activity/create", (req, res) => {
     location: location,
     category: category,
     creater: creater,
+    comments: comments,
   })
     .then((response) => {
       res.status(200).json(response);

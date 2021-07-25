@@ -10,10 +10,12 @@ const activitySchema = new Schema({
   time: String,
   description: String,
   creater: { type: Schema.Types.ObjectId, ref: "User" },
-  comment: { type: Schema.Types.ObjectId, ref: "Comment" },
+  comments: [],
   // creater: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
 const Activity = model("Activity", activitySchema);
 
 module.exports = Activity;
+
+// [{ type: Schema.Types.ObjectId, ref: "Comment" }]
