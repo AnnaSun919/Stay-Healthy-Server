@@ -20,10 +20,10 @@ router.post("/comment/create", (req, res) => {
     activity: activity,
   })
     .then((response) => {
-      console.log(response.activity);
+      console.log(response._id);
       return ActivityModel.findByIdAndUpdate(
         response.activity,
-        { $push: { comments: response.activity } },
+        { $push: { comments: response._id } },
         { new: true }
       );
     })

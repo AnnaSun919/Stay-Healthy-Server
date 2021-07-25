@@ -64,6 +64,11 @@ router.get("/activity/:id", (req, res) => {
   id = req.params.id;
   ActivityModel.findById(id)
     .populate("creater")
+    .populate("comments")
+    .populate({
+      path: "comments",
+      populate: { path: "creater", select: "username image" },
+    })
     .then((response) => {
       res.status(200).json(response);
     })
