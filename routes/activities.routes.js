@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const ActivityModel = require("../models/Activity.model");
-const isLoggedIn = require("./auth.routes.js");
+
+const { isLoggedIn } = require("../middlewares/helper");
 
 router.post("/activity/create", (req, res) => {
   const {
@@ -143,7 +144,7 @@ router.patch("/activity/:id/edit", (req, res) => {
     });
 });
 
-router.post("/activity/:id/join", (req, res) => {
+router.post("/activity/:id/join", isLoggedIn, (req, res) => {
   console.log("Join");
   const { join } = req.body;
   console.log(join);

@@ -4,7 +4,7 @@ const CommentModel = require("../models/Comment.model");
 const ActivityModel = require("../models/Activity.model");
 
 router.post("/comment/create", (req, res) => {
-  const { comment, creater, activity } = req.body;
+  const { comment, creater, activity, createrimg } = req.body;
   console.log(activity);
 
   if (!comment) {
@@ -18,6 +18,7 @@ router.post("/comment/create", (req, res) => {
     comment: comment,
     creater: creater,
     activity: activity,
+    createrimg: createrimg,
   })
     .then((response) => {
       console.log(response);

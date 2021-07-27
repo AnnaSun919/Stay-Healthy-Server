@@ -12,7 +12,6 @@ const activitySchema = new Schema({
   creater: { type: Schema.Types.ObjectId, ref: "User" },
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   joins: [{ type: Schema.Types.ObjectId, String, ref: "User" }],
-  // creater: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
 const Activity = model("Activity", activitySchema);
