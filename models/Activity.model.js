@@ -11,6 +11,7 @@ const activitySchema = new Schema({
   description: String,
   creater: { type: Schema.Types.ObjectId, ref: "User" },
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+  joins: [{ type: Schema.Types.ObjectId, String, ref: "User" }],
   // creater: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 

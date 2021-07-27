@@ -14,6 +14,7 @@ router.post("/activity/create", (req, res) => {
     category,
     creater,
     comments,
+    joins,
   } = req.body;
 
   if (!name || !date || !time || !description || !location) {
@@ -33,6 +34,7 @@ router.post("/activity/create", (req, res) => {
     category: category,
     creater: creater,
     comments: comments,
+    joins: joins,
   })
     .then((response) => {
       res.status(200).json(response);
@@ -63,11 +65,12 @@ router.get("/activity/:id", (req, res) => {
   id = req.params.id;
   ActivityModel.findById(id)
     .populate("creater")
-    .populate("comments")
+    .populate("joins")
     .populate({
       path: "comments",
       populate: { path: "creater", select: "username image" },
     })
+
     .then((response) => {
       res.status(200).json(response);
     })
@@ -133,6 +136,29 @@ router.patch("/activity/:id/edit", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+      res.status(500).json({
+        error: "Something went wrong",
+        message: err,
+      });
+    });
+});
+
+router.post("/activity/:id/join", (req, res) => {
+  console.log("Join");
+  const { join } = req.body;
+  console.log(join);
+  ActivityModel.findByIdAndUpdate(req.params.id)
+    .then((response) => {
+      return ActivityModel.findByIdAndUpdate(
+        response,
+        { $push: { joins: join } },
+        { new: true }
+      );
+    })
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
       res.status(500).json({
         error: "Something went wrong",
         message: err,
