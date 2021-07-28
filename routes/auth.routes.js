@@ -7,9 +7,9 @@ const ActivityModel = require("../models/Activity.model");
 
 const UserModel = require("../models/User.model");
 
+//for signup//
 router.post("/signup", (req, res) => {
   const { username, password, image } = req.body;
-  console.log(username, password);
 
   if (!username || !password || !image) {
     res.status(500).json({

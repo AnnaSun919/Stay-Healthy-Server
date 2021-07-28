@@ -3,9 +3,9 @@ const router = express.Router();
 const CommentModel = require("../models/Comment.model");
 const ActivityModel = require("../models/Activity.model");
 
+//create comment and insert comment to the activity model//
 router.post("/comment/create", (req, res) => {
   const { comment, creater, activity, createrimg } = req.body;
-  console.log(activity);
 
   if (!comment) {
     res.status(500).json({
@@ -21,7 +21,6 @@ router.post("/comment/create", (req, res) => {
     createrimg: createrimg,
   })
     .then((response) => {
-      console.log(response);
       return ActivityModel.findByIdAndUpdate(
         response.activity,
         { $push: { comments: response } },
@@ -40,8 +39,8 @@ router.post("/comment/create", (req, res) => {
     });
 });
 
+//get comments info//
 router.get("/comments", (req, res) => {
-  console.log(`HIHI ${req.params}`);
   CommentModel.find()
     .populate("creater")
     .then((response) => {

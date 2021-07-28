@@ -4,6 +4,7 @@ const ActivityModel = require("../models/Activity.model");
 
 const { isLoggedIn } = require("../middlewares/helper");
 
+// create activity//
 router.post("/activity/create", (req, res) => {
   const {
     time,
@@ -49,6 +50,7 @@ router.post("/activity/create", (req, res) => {
     });
 });
 
+//get all activites details.//
 router.get("/activities", (req, res) => {
   ActivityModel.find()
     .then((activity) => {
@@ -62,6 +64,7 @@ router.get("/activities", (req, res) => {
     });
 });
 
+// get single activity details.//
 router.get("/activity/:id", (req, res) => {
   id = req.params.id;
   ActivityModel.findById(id)
@@ -83,8 +86,8 @@ router.get("/activity/:id", (req, res) => {
     });
 });
 
+//for deleting activity
 router.delete("/activity/:id", (req, res) => {
-  console.log("delete");
   ActivityModel.findByIdAndDelete(req.params.id)
     .then((response) => {
       res.status(200).json(response);
@@ -97,8 +100,8 @@ router.delete("/activity/:id", (req, res) => {
     });
 });
 
+//edit single activity info and show them on edit form //
 router.get("/activity/:id/edit", (req, res) => {
-  console.log("Hi");
   id = req.params.id;
 
   ActivityModel.findById(id)
@@ -114,6 +117,7 @@ router.get("/activity/:id/edit", (req, res) => {
     });
 });
 
+//edit activity//
 router.patch("/activity/:id/edit", (req, res) => {
   let id = req.params.id;
   const { name, location, time, category, description, date } = req.body;
@@ -144,8 +148,8 @@ router.patch("/activity/:id/edit", (req, res) => {
     });
 });
 
+//whenever the user join,, create an users id array in activiytmodel//
 router.post("/activity/:id/join", (req, res) => {
-  console.log("Join");
   const { join } = req.body;
   console.log(join);
   ActivityModel.findByIdAndUpdate(req.params.id)
