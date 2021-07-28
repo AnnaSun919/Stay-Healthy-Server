@@ -144,7 +144,7 @@ router.patch("/activity/:id/edit", (req, res) => {
     });
 });
 
-router.post("/activity/:id/join", isLoggedIn, (req, res) => {
+router.post("/activity/:id/join", (req, res) => {
   console.log("Join");
   const { join } = req.body;
   console.log(join);
