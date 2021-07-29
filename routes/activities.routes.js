@@ -5,7 +5,7 @@ const ActivityModel = require("../models/Activity.model");
 const { isLoggedIn } = require("../middlewares/helper");
 
 // create activity//
-router.post("/activity/create", (req, res) => {
+router.post("/activity/create", isLoggedIn, (req, res) => {
   const {
     time,
     date,
