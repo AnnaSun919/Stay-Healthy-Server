@@ -2,7 +2,9 @@
 
 ## Description
 
-Stay Healthy is a web providing activities to help you stay healthy both mentally and phsically.
+Stay Healthy is a Platform for users to create and join healthy activities.
+
+This site was built using [herokuapp](https://be-active-stay-healthy.herokuapp.com/).
 
 ## User Stories
 
